@@ -3,8 +3,6 @@ body {
 }
 
 nav {
-  display: flex;
-  justify-content: space-between;
   font-size: 20px;
   font-family: 'Outfit', sans-serif;
   font-weight: 400;
@@ -15,9 +13,31 @@ nav {
   box-shadow: 3px 1px rgb(204, 204, 204);
 }
 
+#navFormList {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+header {
+  width: 90%;
+  margin: auto;
+  margin-top: 5em;
+  border-bottom: 1px solid lightgrey;
+}
+
+#formList {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1em;
+}
+
+#content {
+  margin-right: 8px;
+}
+
 .category-container{
-  position: relative;
-  top: 45px;
+  margin-top: 1em;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(auto-fit, 200px);

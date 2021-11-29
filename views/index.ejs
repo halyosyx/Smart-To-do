@@ -18,13 +18,23 @@
 
 <body>
   <nav>
+  <form id="navFormList" action="/logout/" method="post">
     <span>ToDo!</span>
-    <span>[name]</span>
+    <span>[name]
+      <input type="submit" value="logout">
+    </span>
+  </form>
   </nav>
+
+  <header>
+    <form id="formList" action="/cards/" method="post">
+      <input type="text" id="content" name="content">
+      <input type="submit" value="Submit">
+    </form>
+  </header>
 
   <main>
     <section class="category-container">
-
       <div class="layout__list" id="restaurants">
         <label class="category">To Eat</label>
 
