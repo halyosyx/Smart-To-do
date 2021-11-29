@@ -8,13 +8,117 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
+  <link rel="stylesheet" href="/styles/todo.css" type="text/css" />
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/login.js"></script>
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+  <header>
+    <div class="header_name">
+      <h1>Smart TODO</h1>
+    </div>
+    <div class="login_name">
+      <button class="login_button" type="button" id="login">Login</button>
+      <script>$("#login").on('click', function () {
+        $.confirm({
+          boxWidth: '30%',
+          boxHeight: '50%',
+          useBootstrap: false,
+          draggable: true,
+          title: 'Login!',
+          content: '' +
+            '<form action="" class="formName">' +
+            '<label >Email:</label>' +
+            ' <input type="text"><br/><br/>' +
+            '<label>Password</label>' +
+            '<input type="text"><br/> ' +
+            '</form>',
+          buttons: {
+            formSubmit: {
+              text: 'Submit',
+              display: 'center',
+              btnClass: 'btn-blue',
+              action: function () {
+                var name = this.$content.find('.name').val();
+                if (!name) {
+                  $.alert('provide a valid name');
+                  return false;
+                }
+                $.alert('Your name is ' + name);
+              }
+            },
+            cancel: function () {
+              //close
+            },
+          },
+          onContentReady: function () {
+            // bind to events
+            var jc = this;
+            this.$content.find('form').on('submit', function (e) {
+              // if the user submits the form by pressing enter in the field.
+              e.preventDefault();
+              jc.$$formSubmit.trigger('click'); // reference the button and click it
+            });
+          }
+        });
+      })
+    </script>
+      <button class="login_button" type="button" id="register">Register</button>
+      <script>
+        $("#register").on('click', function () {
+          $.confirm({
+            boxWidth: '30%',
+          useBootstrap: false,
+           
+            title: 'Register!',
+            content: '' +
+              '<form action="" class="formName">' +
+              '<label >Name:</label>' +
+              ' <input type="text"><br/><br/>' +
+              '<label >Email:</label>' +
+              ' <input type="text"><br/><br/>' +
+              '<label>Password</label>' +
+              '<input type="text"><br/> ' +
+              '</form>',
+            buttons: {
+              formSubmit: {
+                text: 'Submit',
+                btnClass: 'btn-blue',
+                action: function () {
+                  var name = this.$content.find('.name').val();
+                  if (!name) {
+                    $.alert('provide a valid name');
+                    return false;
+                  }
+                  $.alert('Your name is ' + name);
+                }
+              },
+              cancel: function () {
+                //close
+              },
+            },
+            onContentReady: function () {
+              // bind to events
+              var jc = this;
+              this.$content.find('form').on('submit', function (e) {
+                // if the user submits the form by pressing enter in the field.
+                e.preventDefault();
+                jc.$$formSubmit.trigger('click'); // reference the button and click it
+              });
+            }
+          });
+        })
+      </script>
+      <!-- </form> -->
+
+    </div>
+  </header>
+
+
 </body>
 
 </html>
