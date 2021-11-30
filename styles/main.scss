@@ -38,25 +38,22 @@ header {
 
 .category-container{
   margin-top: 1em;
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: repeat(auto-fit, 200px);
-  grid-gap: 50px;
+  display: flex;
 }
 
 .layout__list{
-  display: grid;
-  grid-gap: 5px;
+  list-style-type: none;
+  width: 250px;
 }
 
 .card {
-  display: grid;
   box-shadow: 3px 5px lightgrey;
   border: 1px solid lightgrey;
-  box-sizing: border-box;
+  background-color: white;
   margin-top: 10px;
   padding-left: 5px;
   padding-top: 5px;
+  padding-bottom: 15px;
 }
 
 .category {
