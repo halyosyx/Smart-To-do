@@ -30,6 +30,8 @@ $(document).ready(function() {
   });
 
   //delete the task
+  // WE NEED TO SET id/class OF CARD
+  // IS IT FINE IF WE CALL DIRECT HREF INSTEAD OF AJAX?
   $('#edit-task').on("submit", function(event){
     console.log("Deleting a Task");
     event.preventDefault();
