@@ -7,5 +7,4 @@ $(document).ready(function() {
   $('#restaurants, #books, #shows, #products').sortable({
     connectWith: '.layout__list'
   }).disableSelection();
-
 });
