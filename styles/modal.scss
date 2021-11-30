@@ -1,0 +1,45 @@
+#modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  font-family: 'Outfit', sans-serif;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  margin-top: 8em;
+  border: 1px solid #888;
+  width: 40%;
+}
+
+#popupForm {
+  width: 90%;
+  margin: auto;
+}
+
+#close:hover {
+  cursor: pointer;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 24px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.modal-body {
+  display: flex;
+  gap: 20px;
+}
+
+.button{
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
