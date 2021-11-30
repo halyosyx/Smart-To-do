@@ -9,6 +9,7 @@ $(document).ready(function() {
   //Clears the popup block
   $('#close').click(function() {
     $('#modal').css('display', 'none');
+
   })
 
 });
