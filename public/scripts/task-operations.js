@@ -9,6 +9,7 @@ $(document).ready(function() {
       url : urlPost,
       data : task,
       success : function(){//need to add function which will render added task to respective category
+        //alert("");
       }
     });
   });
