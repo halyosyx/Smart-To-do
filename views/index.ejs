@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/modal.css" type="text/css" />
 
   <link rel="stylesheet" href="/styles/editpopup.css" type="text/css" />
 
@@ -28,11 +29,43 @@
 <!--  -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/pop-up.js"></script>
   <script type="text/javascript" src="/vendor/jquery-ui.js"></script>
+
+  <script src="https://kit.fontawesome.com/b85c3012c6.js" crossorigin="anonymous"></script>
+
+
   <script type="text/javascript" src="/scripts/task-operations.js"></script>
+
 </head>
 
 <body>
+
+  <div id="modal">
+
+    <div class="modal-content">
+      <form id="popupForm" action="popup" method="post">
+
+        <div class="modal-header">
+          <span>Task Name</span>
+          <i class="fas fa-times" id="close"></i>
+        </div>
+
+        <div class="modal-body">
+         <span>Completed</span>
+          <select name="is_done" id="is_done">
+            <option value="done">Done</option>
+            <option value="not_done">Not done</option>
+          </select>
+        </div>
+
+        <input class="button" type="submit" value="update">
+
+    </div>
+  </form>
+
+  </div>
+
   <nav>
   <form id="navFormList" action="/logout/" method="post">
     <span>ToDo!</span>
