@@ -4,6 +4,7 @@ $(document).ready(function() {
 
   console.log('READY');
 
+
   const data = [
     {
       'Spiderman':
