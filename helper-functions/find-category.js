@@ -1,8 +1,9 @@
+require("dotenv").config();
 const imdb = require('imdb-api');
 const yelp = require('yelp-fusion');
 const books = require('node-google-books-search-promise');
 
-let apiKeyIMDB = 'k_bntzn962';
+let apiKeyIMDB = process.env.apiKeyIMDB;
 var requestOptions = {
   method: 'GET'
 };
@@ -13,7 +14,7 @@ const isMovie = function(strTask) {
     .catch(error => console.log('error', error));
 }
 
-const yelpKey = 'noUQYkjyq7YBITSqtCbZstcZMZBh9Go_ZBXLoQDJ6SM_dBffoStTXlBgGnNQb6c2T3mnm3mJwaAn2u-I24F3S4A8VcxUDW8Kz03-Jn5pJq6UlxE_bAJGMpmQTIqnYXYx';
+const yelpKey = process.env.yelpKey;
 const isRestaurant = function(task) {
   const client = yelp.client(yelpKey);
   return client.search({
