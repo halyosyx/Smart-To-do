@@ -9,6 +9,7 @@ $(document).ready(function() {
     {
       'Spiderman':
       {
+        'id' : 1,
         'category': 'shows'
       }
     },
@@ -16,6 +17,7 @@ $(document).ready(function() {
     {
       'Game of thrones':
       {
+        'id' : 2,
         'category' : 'books'
       }
     },
@@ -23,18 +25,21 @@ $(document).ready(function() {
     {
       'Mcdonalds':
       {
+        'id' : 3,
         'category' : 'restaurants'
       }
     },
     {
       'Iphone 12':
       {
+        'id' : 4,
         'category' : 'products'
       }
     },
     {
       'Dick Grayson':
       {
+        'id' : 5,
         'category' : 'books'
       }
     }
@@ -50,6 +55,7 @@ $(document).ready(function() {
       for (const title in card) {
         const $label = $('<label>').text(title);
         const $card = $('<li>').addClass('card');
+        $($card).attr( "id", card[title]['id'] )
         $card.append($label);
 
         if ($shows === card[title].category) {

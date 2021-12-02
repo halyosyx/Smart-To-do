@@ -1,5 +1,9 @@
 
 $(document).ready(function() {
+
+  
+  $('#formList').on("submit", function(event) {
+
    const isValid = function () {
     const text = $("#content").first().val();
     // error for no data pass
@@ -17,6 +21,7 @@ $(document).ready(function() {
   }
   $('#formList').on("submit", function(event){
     // alert("in form submit");
+
     event.stopImmediatePropagation();
     event.preventDefault();
    
@@ -26,13 +31,17 @@ $(document).ready(function() {
     let urlPost = $(this).attr('action');
     let task = $(this).serialize();
     console.log("check task",task);
-
+    
     $.post(urlPost, task, function(){})
     .done(function(){
+
+    })
+
       $("#formList").trigger("reset");
       $(".error").hide();
     })
     
+
   });
 
 
