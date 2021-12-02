@@ -35,7 +35,7 @@
   <script src="https://kit.fontawesome.com/b85c3012c6.js" crossorigin="anonymous"></script>
 
 
-  <script type="text/javascript" src="/scripts/task-operations.js"></script>
+  <script defer type="text/javascript" src="/scripts/task-operations.js"></script>
 
 </head>
 
@@ -76,10 +76,9 @@
   </nav>
 
   <header>
-    <form id="formList" action="/api/tasks/new" method="post">
+    <form id="formList" action="/tasks/new" method="post">
       <input type="text" id="content" name="content">
       <button type="submit">submit</button>
-      <!-- <input type="submit" value="Submit"> -->
     </form>
   </header>
 
