@@ -4,82 +4,50 @@ $(document).ready(function() {
 
   console.log('READY');
 
+  const renderCards = function(data) {
+    const $shows = $('#to_watch').attr('id');
+    const $book = $('#to_read').attr('id');
+    const $restaurant = $('#to_eat').attr('id');
+    const $product = $('#to_buy').attr('id');
 
-  const data = [
-    {
-      'Spiderman':
-      {
-        'category': 'shows'
-      }
-    },
+    for (const title in data) {
+      const $label = $('<label>').text(data[title].task_name);
+      const $icon = $('<i>').addClass('far fa-trash-alt').attr('id', 'delete');
+      const $card = $('<li>').addClass('card');
+      $card.append($label, $icon);
 
-    {
-      'Game of thrones':
-      {
-        'category' : 'books'
+      if ($shows === data[title].category_name) {
+           $('#to_watch').append($card)
       }
-    },
-
-    {
-      'Mcdonalds':
-      {
-        'category' : 'restaurants'
+      if ($book === data[title].category_name) {
+        $('#to_read').append($card)
       }
-    },
-    {
-      'Iphone 12':
-      {
-        'category' : 'products'
+      if ($restaurant === data[title].category_name) {
+        $('#to_eat').append($card)
       }
-    },
-    {
-      'Dick Grayson':
-      {
-        'category' : 'books'
+      if ($product === data[title].category_name) {
+        $('#to_buy').append($card)
       }
     }
-  ]
 
-  const createCards = function(data) {
-    const $shows = $('#shows').attr('id');
-    const $book = $('#books').attr('id');
-    const $restaurant = $('#restaurants').attr('id');
-    const $product = $('#products').attr('id');
 
-    for (const card of data) {
-      for (const title in card) {
-        const $label = $('<label>').text(title);
-        const $card = $('<li>').addClass('card');
-        $card.append($label);
-
-        if ($shows === card[title].category) {
-          $('#shows').append($card)
-        }
-        if ($book === card[title].category) {
-          $('#books').append($card)
-        }
-        if ($restaurant === card[title].category) {
-          $('#restaurants').append($card)
-        }
-        if ($product === card[title].category) {
-          $('#products').append($card)
-        }
-
-      }
-    }
   }
 
-  createCards(data);
+  const loadCards = function() {
+    $.ajax({
+      type: 'GET',
+      url: '/tasks/',
+      dataType: 'JSON'
+    })
+      .done(data => {
+        renderCards(data);
+      })
+  }
 
-  //function getAllTasks() {
-  //  $.ajax({
-  //    method: 'get',
-  //    url:
-  //  });
-  //}
+  loadCards();
 
-  $('#restaurants, #books, #shows, #products').sortable({
-    connectWith: '.layout__list'
+  $('#to_eat, #to_read, #to_watch, #to_buy').sortable({
+    connectWith: '.category'
   }).disableSelection();
 
 });

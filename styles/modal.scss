@@ -41,8 +41,24 @@
   width: auto;
 }
 
+.card{
+  display: flex;
+  justify-content: space-between;
+}
+
+#delete {
+  margin-right: 1em;
+  margin-top: 5px;
+}
+
+#delete:hover{
+  cursor: pointer;
+}
+
 .button{
   margin-top: 2em;
   margin-bottom: 1em;
   margin-left: 9.4em;
 }
+
+

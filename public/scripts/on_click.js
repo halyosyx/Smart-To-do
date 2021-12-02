@@ -12,4 +12,11 @@ $(document).ready(function() {
 
   })
 
+  // HANDLES DELETE
+  $('.category').on('click', '#delete', function() {
+    $('.card').hide();
+    console.log('DELETE');
+  })
+
+
 });

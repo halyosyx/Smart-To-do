@@ -12,12 +12,20 @@ const addNewTask = function (db, task, category) {
     })// data.rows[0]['id']
 
 }
+
 module.exports = (db) => {
+
+  console.log('connect');
+
+
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM tasks;`)
+    db.query(`SELECT tasks.name as task_name, categories.name as category_name
+    FROM tasks
+    JOIN categories
+    ON category_id = categories.id;`)
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        const tasks = data.rows;
+        res.json( tasks );
       })
       .catch(err => {
         res
@@ -25,6 +33,20 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
+  //router.get("/", (req, res) => {
+  //  db.query(`SELECT * FROM tasks;`)
+  //    .then(data => {
+  //      const users = data.rows;
+  //      res.json({ users });
+  //    })
+  //    .catch(err => {
+  //      res
+  //        .status(500)
+  //        .json({ error: err.message });
+  //    });
+  //});
 
   router.post("/new", (req, res) => {
     const task = req.body.content;
@@ -68,7 +90,7 @@ module.exports = (db) => {
           })
         }).catch(err => console.log(err.message))
 
-        // .then((task) => 
+        // .then((task) =>
         //   {
         //     console.log("Category of Task is----to_buy");
         //     addNewTask(db, task, 'to_buy');
@@ -95,5 +117,6 @@ module.exports = (db) => {
       console.log("[Task.js]---Deleting a Task");
       res.send("resolved");
     });
+
     return router;
   };

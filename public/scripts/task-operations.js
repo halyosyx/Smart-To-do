@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  
   $('#formList').on("submit", function(event){
     // alert("in form submit");
     event.stopImmediatePropagation();
@@ -9,9 +8,11 @@ $(document).ready(function() {
     console.log("check task",task);
 
     $.post(urlPost, task, function(){})
-    .done(function(){})
-  
+    .done(function(){
+
+    })
   });
+
 
 
   // edit task//////
