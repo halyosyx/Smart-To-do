@@ -45,16 +45,17 @@
       <form id="popupForm" action="popup" method="post">
 
         <div class="modal-header">
-          <span>Task Name</span>
+          <span><input id="taskName" type="text" ></span>
           <i class="fas fa-times" id="close"></i>
         </div>
 
         <div class="modal-body">
-         <span>Completed</span>
-          <select name="is_done" id="is_done">
+         <span id="isCompleted">Completed</span>
+         <input type="checkbox" id = "is_done" value="0"/>
+          <!-- <select name="is_done" id="is_done">
             <option value="no">No</option>
             <option value="yes">Yes</option>
-          </select>
+          </select> -->
         </div>
 
         <input class="button" type="submit" value="update">
@@ -67,7 +68,7 @@
   <nav>
   <form id="navFormList" action="/logout/" method="post">
     <span>ToDo!</span>
-    <span>[name]
+    <span><%=user%>
       <input type="submit" value="logout">
     </span>
   </form>

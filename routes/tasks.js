@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { isMovie, isRestaurant, isBook } = require('../helper-functions/find-category');
 
-const addNewTask = function (db, task, category) {
+const addNewTask = function (db, task, category, userId) {
   console.log(task);
   db.query(`SELECT id FROM categories where name = $1`, [category])
     .then(data => {
       db.query(`INSERT INTO tasks (name,category_id,user_id)
-    VALUES($1,$2,$3) `, [task, data.rows[0]['id'], 1]); //need to change user id once we set session cookies.
+    VALUES($1,$2,$3) `, [task, data.rows[0]['id'], userId]); //need to change user id once we set session cookies.
     })// data.rows[0]['id']
 
 }
@@ -15,10 +15,16 @@ const addNewTask = function (db, task, category) {
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM tasks;`)
+    const userId = req.session.userId;
+    console.log(req.session.userId);
+    db.query(`SELECT t.id, t.name AS taskName,c.name AS CategName FROM tasks AS t 
+            JOIN categories AS c ON t.category_id = c.id
+            JOIN users AS u on u.id = t.user_id
+            where t.user_id = $1;
+            `,[userId])
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        const tasks = data.rows;
+        res.json( tasks );
       })
       .catch(err => {
         res
@@ -29,12 +35,13 @@ module.exports = (db) => {
 
   router.post("/new", (req, res) => {
     const task = req.body.content;
+    const userId = req.session.userId;
     isMovie(task).then(
       (movie) => {
-        if (movie['results'] && movie['results'][0].title.toUpperCase() === task.toUpperCase()) {
+        if (movie['results'] && movie['results'][0] && movie['results'][0].title.toUpperCase() === task.toUpperCase()) {
           console.log("Category of Task is ---to_watch");
-          addNewTask(db, task, 'to_watch');
-          res.end("resolved");
+          addNewTask(db, task, 'to_watch', userId);
+          res.end();
         } else {
           return task;
         }
@@ -44,7 +51,7 @@ module.exports = (db) => {
           console.log("Book results----" + task);
           if (results && results[0].title.toUpperCase() === task.toUpperCase()) {
             console.log("Category of Task is----to_read");
-            addNewTask(db, task, 'to_read');
+            addNewTask(db, task, 'to_read', userId);
             res.end("resolved");
           } else {
             return task;
@@ -56,7 +63,7 @@ module.exports = (db) => {
             if ((restaurant && restaurant.businesses[0] && restaurant.businesses[0].name.toUpperCase() === task.toUpperCase())) {
               console.log({ restaurant });
               console.log("Category of Task is ---to_eat");
-              addNewTask(db, task, 'to_eat');
+              addNewTask(db, task, 'to_eat', userId);
               res.end("resolved");
             } else {
               return task;
@@ -64,25 +71,36 @@ module.exports = (db) => {
           }).then(task => {
             if(!task) return;
             console.log("Category of Task is----to_buy", task);
-            addNewTask(db, task, 'to_buy');
+            addNewTask(db, task, 'to_buy', userId);
             res.end("resolved");
           })
         }).catch(err => console.log(err.message))
 
-        // .then((task) => 
-        //   {
-        //     console.log("Category of Task is----to_buy");
-        //     addNewTask(db, task, 'to_buy');
-        //     res.end("resolved");
-        //   })
-        // .catch(e => {
-        //   console.log(e);
-        //   // console.log("[Task.js]---Adding New Task");
-        //   res.end("resolved");
+
         })
 
       })
 
+      router.get("/:id", (req, res) => {
+        const userId = req.session.userId;
+        const taskId = req.params.id;
+        console.log(taskId);
+        db.query(`SELECT t.id, t.name AS taskName, is_done, c.name AS CategName FROM tasks AS t 
+                JOIN categories AS c ON t.category_id = c.id
+                JOIN users AS u on u.id = t.user_id
+                where t.id = $1;
+                `,[taskId])//[userId, taskId])//removing for testing purposes we need to set in query  AND t.user_id = $2
+          .then(data => {
+            const tasks = data.rows;
+            console.log(tasks);
+            res.json( tasks );
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .json({ error: err.message });
+          });
+      });
 
     //EDIT ROUTE
     router.put("/:id", (req, res) => {

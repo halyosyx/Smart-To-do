@@ -1,15 +1,15 @@
 $(document).ready(function() {
   
-  $('#formList').on("submit", function(event){
-    // alert("in form submit");
+  $('#formList').on("submit", function(event) {
     event.stopImmediatePropagation();
     event.preventDefault();
     let urlPost = $(this).attr('action');
     let task = $(this).serialize();
     console.log("check task",task);
-
+    
     $.post(urlPost, task, function(){})
-    .done(function(){})
+    .done(function(){
+    })
   
   });
 
