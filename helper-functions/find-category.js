@@ -10,7 +10,9 @@ var requestOptions = {
 
 const isMovie = function(strTask) {
   return fetch(`https://imdb-api.com/en/API/SearchTitle/${apiKeyIMDB}/${strTask}`, requestOptions)
-    .then(response => response.json())
+    .then(response => {
+      return response.json()
+    })
     .catch(error => console.log('error', error));
 }
 
@@ -20,7 +22,11 @@ const isRestaurant = function(task) {
   return client.search({
     term: `${task}`,
     location: 'Saskatoon'
+  }).then(response => {
+    return JSON.parse(response.body)
   })
+  .catch(error => console.log('error', error));
+
 }
 
 const isBook = function(task) {
