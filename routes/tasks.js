@@ -8,7 +8,7 @@ const addNewTask = function (db, task, category) {
     .then(data => {
 
       db.query(`INSERT INTO tasks (name,category_id,user_id)
-    VALUES($1,$2,$3) `, [task, data.rows[0][id], 1]); //need to change user id once we set session cookies.
+    VALUES($1,$2,$3) `, [task, data.rows[0]['id'], 1]); //need to change user id once we set session cookies.
     })// data.rows[0]['id']
 
 }
