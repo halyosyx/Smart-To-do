@@ -74,8 +74,11 @@
 
   <nav>
     <form id="navFormList" action="/api/users/logout" method="post">
-      <span>ToDo!</span>
-      <span>[name]
+      <div class="title">
+        <i class="fas fa-clipboard-list"></i>
+        <span>ToDo!</span>
+      </div>
+      <span>
         <input type="submit" value="logout">
       </span>
     </form>
@@ -92,21 +95,25 @@
   <main>
     <section class="category-container">
       <div class="layout__section" id='to_eat'>
+        <i class="fas fa-utensils"></i>
         <label class="category">To Eat</label>
         <ul class="layout__list">
         </ul>
       </div>
       <div class="layout__section" id='to_read'>
+        <i class="fas fa-book-open"></i>
         <label class="category">To Read</label>
         <ul class="layout__list">
         </ul>
       </div>
       <div class="layout__section" id="to_watch">
+        <i class="fas fa-tv"></i>
         <label class="category">To Watch</label>
         <ul class="layout__list">
         </ul>
       </div>
       <div class="layout__section" id="to_buy">
+        <i class="fas fa-shopping-cart"></i>
         <label class="category">To Buy</label>
         <ul class="layout__list">
 

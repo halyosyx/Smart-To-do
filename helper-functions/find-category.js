@@ -21,7 +21,7 @@ const isRestaurant = function(task) {
   const client = yelp.client(yelpKey);
   return client.search({
     term: `${task}`,
-    location: 'Saskatoon'
+    location: 'Vancouver'
   }).then(response => {
     return JSON.parse(response.body)
   })
