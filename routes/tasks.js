@@ -6,13 +6,12 @@ const addNewTask = function (db, task, category, userId) {
   console.log(task);
   db.query(`SELECT id FROM categories where name = $1`, [category])
     .then(data => {
+
       db.query(`INSERT INTO tasks (name,category_id,user_id)
     VALUES($1,$2,$3) `, [task, data.rows[0]['id'], userId]); //need to change user id once we set session cookies.
     })// data.rows[0]['id']
 
 }
-
-
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId;

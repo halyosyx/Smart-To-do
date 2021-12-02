@@ -17,4 +17,3 @@ VALUES('buy apple','2021-11-30',1,1),
 ('kids story','2021-12-01',2,2),
 ('A Boy Called Cristmas','2021-12-02',1,3),
 ('Table','2021-12-03',3,4);
-
