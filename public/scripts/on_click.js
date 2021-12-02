@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   //Shows the popup display
   //This can also handle getting the card information
-  $('.card').click(function() {
+  $('.card').click(function() {alert("in popup")
     const taskId = $(this).attr('id');//tasks
     const url = `/tasks/${taskId}`;
     $.ajax({
@@ -26,9 +26,7 @@ $(document).ready(function() {
 
   // HANDLES DELETE
   $('.category').on('click', '#delete', function() {
-    $('.card').hide();
+    //$('.card').hide();
     console.log('DELETE');
   })
-
-
 });

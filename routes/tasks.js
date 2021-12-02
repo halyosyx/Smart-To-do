@@ -22,13 +22,14 @@ module.exports = (db) => {
 
     const userId = req.session.userId;
     console.log(req.session.userId);
-    db.query(`SELECT t.id, t.name AS taskName,c.name AS CategName FROM tasks AS t
+    db.query(`SELECT t.id, t.name AS task_name,c.name AS category_name FROM tasks AS t
             JOIN categories AS c ON t.category_id = c.id
             JOIN users AS u on u.id = t.user_id
             where t.user_id = $1;
             `,[userId])
       .then(data => {
         const tasks = data.rows;
+        console.log(tasks);
         res.json( tasks );
       })
       .catch(err => {
@@ -93,23 +94,7 @@ module.exports = (db) => {
             addNewTask(db, task, 'to_buy', userId);
             res.end("resolved");
           })
-        }).catch(err => console.log(err.message))
-
-<<<<<<< HEAD
-        // .then((task) =>
-        //   {
-        //     console.log("Category of Task is----to_buy");
-        //     addNewTask(db, task, 'to_buy');
-        //     res.end("resolved");
-        //   })
-        // .catch(e => {
-        //   console.log(e);
-        //   // console.log("[Task.js]---Adding New Task");
-        //   res.end("resolved");
-=======
-
->>>>>>> master
-        })
+        }).catch(err => console.log(err.message))})
 
       })
 

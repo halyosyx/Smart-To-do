@@ -1,7 +1,6 @@
 // Client facing scripts here
 
 $(document).ready(function () {
-
   console.log('READY');
 
   //const data = [
@@ -49,10 +48,11 @@ $(document).ready(function () {
     const $restaurant = $('#to_eat').attr('id');
     const $product = $('#to_buy').attr('id');
 
-    for (const title in data) {
+    for (const title in data) { 
       const $label = $('<label>').text(data[title].task_name);
       const $icon = $('<i>').addClass('far fa-trash-alt').attr('id', 'delete');
       const $card = $('<li>').addClass('card');
+      $card.attr("id", data[title].id)
       $card.append($label, $icon);
 
       if ($shows === data[title].category_name) {
@@ -66,15 +66,15 @@ $(document).ready(function () {
       }
       if ($product === data[title].category_name) {
         $('#to_buy').append($card)
-
-        for (const card of data) {
-          for (const title in card) {
-            const $label = $('<label>').text(title);
-            const $card = $('<li>').addClass('card');
-            $($card).attr("id", card[title]['id'])
-            $card.append($label);
-          }
-        }
+      }      
+    // for (const card of data) {
+    //       for (const title in card) {
+    //         const $label = $('<label>').text(title);
+    //         const $card = $('<li>').addClass('card');
+    //         $($card).attr("id", card[title]['id'])
+    //         $card.append($label);
+    //       }
+    //     }
       }
     }
 
@@ -94,6 +94,4 @@ $(document).ready(function () {
       $('#to_eat, #to_read, #to_watch, #to_buy').sortable({
         connectWith: '.category'
       }).disableSelection();
-  }
-});
-
+  });
