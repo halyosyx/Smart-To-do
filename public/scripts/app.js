@@ -1,10 +1,49 @@
 // Client facing scripts here
 
-$(document).ready(function() {
+$(document).ready(function () {
 
   console.log('READY');
 
-  const renderCards = function(data) {
+  //const data = [
+  //  {
+  //    'Spiderman':
+  //    {
+  //      'id': 1,
+  //      'category': 'shows'
+  //    }
+  //  },
+//
+  //  {
+  //    'Game of thrones':
+  //    {
+  //      'id': 2,
+  //      'category': 'books'
+  //    }
+  //  },
+//
+  //  {
+  //    'Mcdonalds':
+  //    {
+  //      'id': 3,
+  //      'category': 'restaurants'
+  //    }
+  //  },
+  //  {
+  //    'Iphone 12':
+  //    {
+  //      'id': 4,
+  //      'category': 'products'
+  //    }
+  //  },
+  //  {
+  //    'Dick Grayson':
+  //    {
+  //      'id': 5,
+  //      'category': 'books'
+  //    }
+  //  }];
+
+  const renderCards = function (data) {
     const $shows = $('#to_watch').attr('id');
     const $book = $('#to_read').attr('id');
     const $restaurant = $('#to_eat').attr('id');
@@ -17,7 +56,7 @@ $(document).ready(function() {
       $card.append($label, $icon);
 
       if ($shows === data[title].category_name) {
-           $('#to_watch').append($card)
+        $('#to_watch').append($card)
       }
       if ($book === data[title].category_name) {
         $('#to_read').append($card)
@@ -27,27 +66,34 @@ $(document).ready(function() {
       }
       if ($product === data[title].category_name) {
         $('#to_buy').append($card)
+
+        for (const card of data) {
+          for (const title in card) {
+            const $label = $('<label>').text(title);
+            const $card = $('<li>').addClass('card');
+            $($card).attr("id", card[title]['id'])
+            $card.append($label);
+          }
+        }
       }
     }
 
+      const loadCards = function () {
+        $.ajax({
+          type: 'GET',
+          url: '/tasks/',
+          dataType: 'JSON'
+        })
+          .done(data => {
+            renderCards(data);
+          })
+      }
 
+      loadCards();
+
+      $('#to_eat, #to_read, #to_watch, #to_buy').sortable({
+        connectWith: '.category'
+      }).disableSelection();
   }
-
-  const loadCards = function() {
-    $.ajax({
-      type: 'GET',
-      url: '/tasks/',
-      dataType: 'JSON'
-    })
-      .done(data => {
-        renderCards(data);
-      })
-  }
-
-  loadCards();
-
-  $('#to_eat, #to_read, #to_watch, #to_buy').sortable({
-    connectWith: '.category'
-  }).disableSelection();
-
 });
+

@@ -1,8 +1,32 @@
+
 $(document).ready(function() {
+
+  $('#formList').on("submit", function(event) {
+
+   const isValid = function () {
+    const text = $("#content").first().val();
+    // error for no data pass
+    if (text === "") {
+      $(".error").text("please enter some textÍ");
+      $(".error").slideDown("slow");
+      // $(".error").show();
+      return true;
+   }
+   if (text.length > 255) {
+    $(".error").text("length is to longÍ");
+    $(".error").slideDown("slow");
+    return true;
+    }
+  }
   $('#formList').on("submit", function(event){
     // alert("in form submit");
+
     event.stopImmediatePropagation();
     event.preventDefault();
+
+   if(isValid()){
+     return;
+   };
     let urlPost = $(this).attr('action');
     let task = $(this).serialize();
     console.log("check task",task);
@@ -11,6 +35,12 @@ $(document).ready(function() {
     .done(function(){
 
     })
+
+      $("#formList").trigger("reset");
+      $(".error").hide();
+    })
+
+
   });
 
 
@@ -38,8 +68,13 @@ $(document).ready(function() {
   //   event.preventDefault();
   //   let urlPost = $(this).attr('action');
   //   let task = $(this).serialize();
+  //   // $.ajax('/tweets', { method: 'GET' })
+  //   // .then(function(tweets) {
+  //   //   // render function call for you
+  //   //   renderTweets(tweets);
+  //   // });
   //   $.ajax({
-  //     type: "DELETE",
+  //     type: "",
   //     url : urlPost,
   //     data : task,
   //     success : function(){//need to add function which will render added task to respective category
