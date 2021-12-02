@@ -27,13 +27,15 @@
 <!--  -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/pop-up.js"></script>
+  <script type="text/javascript" src="/scripts/on_click.js"></script>
   <script type="text/javascript" src="/vendor/jquery-ui.js"></script>
 
   <script src="https://kit.fontawesome.com/b85c3012c6.js" crossorigin="anonymous"></script>
 
 
   <script defer type="text/javascript" src="/scripts/task-operations.js"></script>
+
+
 
 </head>
 
@@ -45,7 +47,11 @@
       <form id="popupForm" action="popup" method="post">
 
         <div class="modal-header">
+<<<<<<< HEAD
+          <textarea ></textarea>
+=======
           <span><input id="taskName" type="text" ></span>
+>>>>>>> master
           <i class="fas fa-times" id="close"></i>
         </div>
 
@@ -84,20 +90,20 @@
 
   <main>
     <section class="category-container">
-      <ul class="layout__list" id="restaurants">
-        <label class="category">To Eat</label>
+      <ul class="layout__list" >
+        <label class="category"id="to_eat">To Eat</label>
       </ul>
 
-      <ul class="layout__list" id="books">
-        <label class="category">To Read</label>
+      <ul class="layout__list" >
+        <label class="category" id="to_read">To Read</label>
       </ul>
 
-      <ul class="layout__list" id="shows">
-        <label class="category">To Watch</label>
+      <ul class="layout__list" >
+        <label class="category" id="to_watch">To Watch</label>
       </ul>
 
-      <ul class="layout__list" id="products">
-        <label class="category">To Buy</label>
+      <ul class="layout__list" >
+        <label class="category" id="to_buy">To Buy</label>
       </ul>
 
     </section>

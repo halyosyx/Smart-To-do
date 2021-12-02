@@ -1,7 +1,6 @@
 
 $(document).ready(function() {
 
-  
   $('#formList').on("submit", function(event) {
 
    const isValid = function () {
@@ -16,22 +15,22 @@ $(document).ready(function() {
    if (text.length > 255) {
     $(".error").text("length is to longÍ");
     $(".error").slideDown("slow");
-    return true;     
-  }
+    return true;
+    }
   }
   $('#formList').on("submit", function(event){
     // alert("in form submit");
 
     event.stopImmediatePropagation();
     event.preventDefault();
-   
+
    if(isValid()){
      return;
    };
     let urlPost = $(this).attr('action');
     let task = $(this).serialize();
     console.log("check task",task);
-    
+
     $.post(urlPost, task, function(){})
     .done(function(){
 
@@ -40,9 +39,10 @@ $(document).ready(function() {
       $("#formList").trigger("reset");
       $(".error").hide();
     })
-    
+
 
   });
+
 
 
   // edit task//////

@@ -12,11 +12,17 @@ const addNewTask = function (db, task, category, userId) {
     })// data.rows[0]['id']
 
 }
+
 module.exports = (db) => {
+
+  console.log('connect');
+
+
   router.get("/", (req, res) => {
+
     const userId = req.session.userId;
     console.log(req.session.userId);
-    db.query(`SELECT t.id, t.name AS taskName,c.name AS CategName FROM tasks AS t 
+    db.query(`SELECT t.id, t.name AS taskName,c.name AS CategName FROM tasks AS t
             JOIN categories AS c ON t.category_id = c.id
             JOIN users AS u on u.id = t.user_id
             where t.user_id = $1;
@@ -31,6 +37,20 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
+  //router.get("/", (req, res) => {
+  //  db.query(`SELECT * FROM tasks;`)
+  //    .then(data => {
+  //      const users = data.rows;
+  //      res.json({ users });
+  //    })
+  //    .catch(err => {
+  //      res
+  //        .status(500)
+  //        .json({ error: err.message });
+  //    });
+  //});
 
   router.post("/new", (req, res) => {
     const task = req.body.content;
@@ -75,7 +95,20 @@ module.exports = (db) => {
           })
         }).catch(err => console.log(err.message))
 
+<<<<<<< HEAD
+        // .then((task) =>
+        //   {
+        //     console.log("Category of Task is----to_buy");
+        //     addNewTask(db, task, 'to_buy');
+        //     res.end("resolved");
+        //   })
+        // .catch(e => {
+        //   console.log(e);
+        //   // console.log("[Task.js]---Adding New Task");
+        //   res.end("resolved");
+=======
 
+>>>>>>> master
         })
 
       })
@@ -84,7 +117,7 @@ module.exports = (db) => {
         const userId = req.session.userId;
         const taskId = req.params.id;
         console.log(taskId);
-        db.query(`SELECT t.id, t.name AS taskName, is_done, c.name AS CategName FROM tasks AS t 
+        db.query(`SELECT t.id, t.name AS taskName, is_done, c.name AS CategName FROM tasks AS t
                 JOIN categories AS c ON t.category_id = c.id
                 JOIN users AS u on u.id = t.user_id
                 where t.id = $1;
@@ -113,5 +146,6 @@ module.exports = (db) => {
       console.log("[Task.js]---Deleting a Task");
       res.send("resolved");
     });
+
     return router;
   };

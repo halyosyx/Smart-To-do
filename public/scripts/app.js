@@ -1,91 +1,99 @@
 // Client facing scripts here
 
-$(document).ready(function() {
+$(document).ready(function () {
 
   console.log('READY');
 
+  //const data = [
+  //  {
+  //    'Spiderman':
+  //    {
+  //      'id': 1,
+  //      'category': 'shows'
+  //    }
+  //  },
+//
+  //  {
+  //    'Game of thrones':
+  //    {
+  //      'id': 2,
+  //      'category': 'books'
+  //    }
+  //  },
+//
+  //  {
+  //    'Mcdonalds':
+  //    {
+  //      'id': 3,
+  //      'category': 'restaurants'
+  //    }
+  //  },
+  //  {
+  //    'Iphone 12':
+  //    {
+  //      'id': 4,
+  //      'category': 'products'
+  //    }
+  //  },
+  //  {
+  //    'Dick Grayson':
+  //    {
+  //      'id': 5,
+  //      'category': 'books'
+  //    }
+  //  }];
 
-  const data = [
-    {
-      'Spiderman':
-      {
-        'id' : 1,
-        'category': 'shows'
-      }
-    },
+  const renderCards = function (data) {
+    const $shows = $('#to_watch').attr('id');
+    const $book = $('#to_read').attr('id');
+    const $restaurant = $('#to_eat').attr('id');
+    const $product = $('#to_buy').attr('id');
 
-    {
-      'Game of thrones':
-      {
-        'id' : 2,
-        'category' : 'books'
-      }
-    },
+    for (const title in data) {
+      const $label = $('<label>').text(data[title].task_name);
+      const $icon = $('<i>').addClass('far fa-trash-alt').attr('id', 'delete');
+      const $card = $('<li>').addClass('card');
+      $card.append($label, $icon);
 
-    {
-      'Mcdonalds':
-      {
-        'id' : 3,
-        'category' : 'restaurants'
+      if ($shows === data[title].category_name) {
+        $('#to_watch').append($card)
       }
-    },
-    {
-      'Iphone 12':
-      {
-        'id' : 4,
-        'category' : 'products'
+      if ($book === data[title].category_name) {
+        $('#to_read').append($card)
       }
-    },
-    {
-      'Dick Grayson':
-      {
-        'id' : 5,
-        'category' : 'books'
+      if ($restaurant === data[title].category_name) {
+        $('#to_eat').append($card)
+      }
+      if ($product === data[title].category_name) {
+        $('#to_buy').append($card)
+
+        for (const card of data) {
+          for (const title in card) {
+            const $label = $('<label>').text(title);
+            const $card = $('<li>').addClass('card');
+            $($card).attr("id", card[title]['id'])
+            $card.append($label);
+          }
+        }
       }
     }
-  ]
 
-  const createCards = function(data) {
-    const $shows = $('#shows').attr('id');
-    const $book = $('#books').attr('id');
-    const $restaurant = $('#restaurants').attr('id');
-    const $product = $('#products').attr('id');
-
-    for (const card of data) {
-      for (const title in card) {
-        const $label = $('<label>').text(title);
-        const $card = $('<li>').addClass('card');
-        $($card).attr( "id", card[title]['id'] )
-        $card.append($label);
-
-        if ($shows === card[title].category) {
-          $('#shows').append($card)
-        }
-        if ($book === card[title].category) {
-          $('#books').append($card)
-        }
-        if ($restaurant === card[title].category) {
-          $('#restaurants').append($card)
-        }
-        if ($product === card[title].category) {
-          $('#products').append($card)
-        }
-
+      const loadCards = function () {
+        $.ajax({
+          type: 'GET',
+          url: '/tasks/',
+          dataType: 'JSON'
+        })
+          .done(data => {
+            renderCards(data);
+          })
       }
-    }
+
+      loadCards();
+
+      $('#to_eat, #to_read, #to_watch, #to_buy').sortable({
+        connectWith: '.category'
+      }).disableSelection();
   }
-
-  createCards(data);
-
-  //function getAllTasks() {
-  //  $.ajax({
-  //    method: 'get',
-  //    url:
-  //  });
-  //}
-
-  $('#restaurants, #books, #shows, #products').sortable({
-    connectWith: '.layout__list'
-  }).disableSelection();
-
 });
+
