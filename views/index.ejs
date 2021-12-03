@@ -48,7 +48,9 @@
 
         <div class="modal-header">
 
+
           <span><input id="taskName" type="text" ></span>
+
           <i class="fas fa-times" id="close"></i>
         </div>
 
@@ -69,9 +71,9 @@
   </div>
 
   <nav>
-  <form id="navFormList" action="/logout/" method="post">
+  <form id="navFormList" action="/api/users/logout" method="post">
     <span>ToDo!</span>
-    <span><%=user%>
+    <span>[name]
       <input type="submit" value="logout">
     </span>
   </form>

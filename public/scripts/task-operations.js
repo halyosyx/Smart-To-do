@@ -1,8 +1,5 @@
 
 $(document).ready(function() {
-
-  $('#formList').on("submit", function(event) {
-
    const isValid = function () {
     const text = $("#content").first().val();
     // error for no data pass
@@ -33,16 +30,12 @@ $(document).ready(function() {
 
     $.post(urlPost, task, function(){})
     .done(function(){
-
-    })
-
       $("#formList").trigger("reset");
       $(".error").hide();
+      
     })
-
-
   });
-
+});
 
 
   // edit task//////
@@ -81,4 +74,4 @@ $(document).ready(function() {
   //     }
   //   });
   // });
-});
+// });

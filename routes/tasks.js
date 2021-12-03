@@ -16,7 +16,7 @@ const addNewTask = function (db, task, category, userId) {
 module.exports = (db) => {
 
   console.log('connect');
-
+// delete data
 
   router.get("/", (req, res) => {
 
@@ -29,7 +29,7 @@ module.exports = (db) => {
             `,[userId])
       .then(data => {
         const tasks = data.rows;
-        console.log(tasks);
+
         res.json( tasks );
       })
       .catch(err => {
@@ -94,7 +94,9 @@ module.exports = (db) => {
             addNewTask(db, task, 'to_buy', userId);
             res.end("resolved");
           })
+
         }).catch(err => console.log(err.message))})
+
 
       })
 
@@ -125,12 +127,21 @@ module.exports = (db) => {
       console.log("[Task.js]---Editing a Task");
       res.send("resolved");
     });
-
-    router.delete("/:id", (req, res) => {
-      //DB query here
-      console.log("[Task.js]---Deleting a Task");
-      res.send("resolved");
-    });
+    router.delete("/:id",(req,res) => {
+      const task_id = req.params.id;
+      const userId = req.session.userId;
+      db.query(`UPDATE tasks SET is_active = FALSE WHERE id = $1;`,[task_id])
+      .then(() => {
+        res.end();
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    
+    })
+    
 
     return router;
   };
