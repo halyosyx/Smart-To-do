@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 
   //Shows the popup display
@@ -26,7 +27,16 @@ $(document).ready(function() {
 
   // HANDLES DELETE
   $('.category').on('click', '#delete', function() {
-    $('.card').hide();
+    const id_parent = $( this ).parent().attr("id");
+    $(`#${id_parent}`).hide();
+    const url = `/tasks/${id_parent}`
+    $.ajax({
+      url:url, 
+      method: "DELETE"
+      })
+    .done(function(){
+      
+    })
     console.log('DELETE');
   })
 

@@ -16,19 +16,20 @@ const addNewTask = function (db, task, category, userId) {
 module.exports = (db) => {
 
   console.log('connect');
-
+// delete data
 
   router.get("/", (req, res) => {
 
     const userId = req.session.userId;
     console.log(req.session.userId);
-    db.query(`SELECT t.id, t.name AS taskName,c.name AS CategName FROM tasks AS t
+    db.query(`SELECT t.id, t.name AS task_name,c.name AS category_name FROM tasks AS t
             JOIN categories AS c ON t.category_id = c.id
             JOIN users AS u on u.id = t.user_id
             where t.user_id = $1;
             `,[userId])
       .then(data => {
         const tasks = data.rows;
+        // console.log("hii",tasks);
         res.json( tasks );
       })
       .catch(err => {
@@ -95,7 +96,7 @@ module.exports = (db) => {
           })
         }).catch(err => console.log(err.message))
 
-<<<<<<< HEAD
+       
         // .then((task) =>
         //   {
         //     console.log("Category of Task is----to_buy");
@@ -106,9 +107,8 @@ module.exports = (db) => {
         //   console.log(e);
         //   // console.log("[Task.js]---Adding New Task");
         //   res.end("resolved");
-=======
 
->>>>>>> master
+       
         })
 
       })
@@ -140,12 +140,21 @@ module.exports = (db) => {
       console.log("[Task.js]---Editing a Task");
       res.send("resolved");
     });
-
-    router.delete("/:id", (req, res) => {
-      //DB query here
-      console.log("[Task.js]---Deleting a Task");
-      res.send("resolved");
-    });
+    router.delete("/:id",(req,res) => {
+      const task_id = req.params.id;
+      const userId = req.session.userId;
+      db.query(`UPDATE tasks SET is_active = FALSE WHERE id = $1;`,[task_id])
+      .then(() => {
+        res.end();
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    
+    })
+    
 
     return router;
   };
