@@ -25,7 +25,7 @@ module.exports = (db) => {
     db.query(`SELECT t.id, t.name AS task_name,c.name AS category_name FROM tasks AS t
             JOIN categories AS c ON t.category_id = c.id
             JOIN users AS u on u.id = t.user_id
-            where t.user_id = $1;
+            where t.user_id = $1 AND is_active = TRUE;
             `, [userId])
       .then(data => {
         const tasks = data.rows;
@@ -71,7 +71,7 @@ module.exports = (db) => {
           if (results && results[0].title.toUpperCase() === task.toUpperCase()) {
             console.log("Category of Task is----to_read");
             addNewTask(db, task, 'to_read', userId);
-            res.end("resolved");
+            res.end();
           } else {
             return task;
           }
@@ -80,10 +80,9 @@ module.exports = (db) => {
           isRestaurant(task).then((restaurant) => {
             console.log("restaurant----" + task);
             if ((restaurant && restaurant.businesses[0] && restaurant.businesses[0].name.toUpperCase() === task.toUpperCase())) {
-              console.log({ restaurant });
               console.log("Category of Task is ---to_eat");
               addNewTask(db, task, 'to_eat', userId);
-              res.end("resolved");
+              res.end();
             } else {
               return task;
             }
@@ -91,7 +90,7 @@ module.exports = (db) => {
             if (!task) return;
             console.log("Category of Task is----to_buy", task);
             addNewTask(db, task, 'to_buy', userId);
-            res.end("resolved");
+            res.end();
           })
 
         }).catch(err => console.log(err.message))
@@ -130,7 +129,7 @@ module.exports = (db) => {
     db.query(sql, [taskTitle, is_done, taskId])
       .then(data => {
         const tasks = data.rows;
-        res.json(tasks);
+        res.end();
       })
       .catch(err => {
         res
@@ -138,14 +137,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
-
-  router.delete("/:id", (req, res) => {
-    console.log("[Task.js]---Deleting a Task");
-    res.send("resolved");
-  });
-
-  return router;
-};
 
 router.delete("/:id",(req,res) => {
       const task_id = req.params.id;
@@ -159,9 +150,6 @@ router.delete("/:id",(req,res) => {
           .status(500)
           .json({ error: err.message });
       });
-    
-    })
-    
-
-    return router;
-  };
+    });
+  return router;    
+}
