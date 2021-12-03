@@ -26,10 +26,9 @@ module.exports = (db) => {
             JOIN categories AS c ON t.category_id = c.id
             JOIN users AS u on u.id = t.user_id
             where t.user_id = $1;
-            `,[userId])
+            `, [userId])
       .then(data => {
         const tasks = data.rows;
-
         res.json( tasks );
       })
       .catch(err => {
@@ -66,7 +65,7 @@ module.exports = (db) => {
           return task;
         }
       }).then((task) => {
-        if(!task) return;
+        if (!task) return;
         isBook(task).then(({ results }) => {
           console.log("Book results----" + task);
           if (results && results[0].title.toUpperCase() === task.toUpperCase()) {
@@ -77,7 +76,7 @@ module.exports = (db) => {
             return task;
           }
         }).then((task) => {
-          if(!task) return;
+          if (!task) return;
           isRestaurant(task).then((restaurant) => {
             console.log("restaurant----" + task);
             if ((restaurant && restaurant.businesses[0] && restaurant.businesses[0].name.toUpperCase() === task.toUpperCase())) {
@@ -89,45 +88,66 @@ module.exports = (db) => {
               return task;
             }
           }).then(task => {
-            if(!task) return;
+            if (!task) return;
             console.log("Category of Task is----to_buy", task);
             addNewTask(db, task, 'to_buy', userId);
             res.end("resolved");
           })
 
-        }).catch(err => console.log(err.message))})
-
-
+        }).catch(err => console.log(err.message))
       })
 
-      router.get("/:id", (req, res) => {
-        const userId = req.session.userId;
-        const taskId = req.params.id;
-        console.log(taskId);
-        db.query(`SELECT t.id, t.name AS taskName, is_done, c.name AS CategName FROM tasks AS t
-                JOIN categories AS c ON t.category_id = c.id
-                JOIN users AS u on u.id = t.user_id
-                where t.id = $1;
-                `,[taskId])//[userId, taskId])//removing for testing purposes we need to set in query  AND t.user_id = $2
-          .then(data => {
-            const tasks = data.rows;
-            console.log(tasks);
-            res.json( tasks );
-          })
-          .catch(err => {
-            res
-              .status(500)
-              .json({ error: err.message });
-          });
-      });
+  })
 
-    //EDIT ROUTE
-    router.put("/:id", (req, res) => {
-      //DB query here
-      console.log("[Task.js]---Editing a Task");
-      res.send("resolved");
-    });
-    router.delete("/:id",(req,res) => {
+  router.get("/:id", (req, res) => {
+    const userId = req.session.userId;
+    const taskId = req.params.id;
+    const sql = `SELECT t.id, t.name AS task_name, is_done, c.name AS category_name FROM tasks AS t
+    JOIN categories AS c ON t.category_id = c.id
+    JOIN users AS u on u.id = t.user_id
+    where t.id = $1;
+    `
+    db.query(sql, [taskId])//[userId, taskId])//removing for testing purposes we need to set in query  AND t.user_id = $2
+      .then(data => {
+        const tasks = data.rows;
+        res.json(tasks);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  //EDIT ROUTE
+  router.put("/:id", (req, res) => {
+
+    const is_done = typeof (req.body.is_done) === undefined ? false : true;
+    const taskTitle = req.body.taskTitle;
+    const taskId = req.body.taskId;
+    const sql = `UPDATE tasks SET name = $1, is_done = $2 WHERE id = $3`
+    console.log("[Task.js]---Updating a Task");
+    db.query(sql, [taskTitle, is_done, taskId])
+      .then(data => {
+        const tasks = data.rows;
+        res.json(tasks);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.delete("/:id", (req, res) => {
+    console.log("[Task.js]---Deleting a Task");
+    res.send("resolved");
+  });
+
+  return router;
+};
+
+router.delete("/:id",(req,res) => {
       const task_id = req.params.id;
       const userId = req.session.userId;
       db.query(`UPDATE tasks SET is_active = FALSE WHERE id = $1;`,[task_id])
