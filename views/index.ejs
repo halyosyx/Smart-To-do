@@ -47,10 +47,12 @@
       <form id="popupForm" action="/tasks/id" method="post">
 
         <div class="modal-header">
+
           <input type="hidden" id="taskId" name = "taskId">
           <span>
             <input id="taskName" type="text" name="taskTitle" >
           </span>
+
           <i class="fas fa-times" id="close"></i>
         </div>
 
@@ -73,7 +75,7 @@
   <nav>
   <form id="navFormList" action="/api/users/logout" method="post">
     <span>ToDo!</span>
-    <span><%=user%>
+    <span>[name]
       <input type="submit" value="logout">
     </span>
   </form>

@@ -54,7 +54,7 @@ $(document).ready(function () {
       const $card = $('<li>').addClass('card');
       $card.attr("id", data[title].id)
       $card.append($label, $icon);
-
+      // console.log("tiii", title);
       if ($shows === data[title].category_name) {
         $('#to_watch').append($card)
       }
@@ -66,15 +66,7 @@ $(document).ready(function () {
       }
       if ($product === data[title].category_name) {
         $('#to_buy').append($card)
-      }      
-    // for (const card of data) {
-    //       for (const title in card) {
-    //         const $label = $('<label>').text(title);
-    //         const $card = $('<li>').addClass('card');
-    //         $($card).attr("id", card[title]['id'])
-    //         $card.append($label);
-    //       }
-    //     }
+
       }
     }
 
@@ -95,5 +87,5 @@ $(document).ready(function () {
         connectWith: '.category'
       }).disableSelection();
 
-      module.exports = { loadCards };
   });
+
