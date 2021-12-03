@@ -29,7 +29,7 @@ module.exports = (db) => {
             `,[userId])
       .then(data => {
         const tasks = data.rows;
-        // console.log("hii",tasks);
+
         res.json( tasks );
       })
       .catch(err => {
@@ -94,22 +94,9 @@ module.exports = (db) => {
             addNewTask(db, task, 'to_buy', userId);
             res.end("resolved");
           })
-        }).catch(err => console.log(err.message))
 
-       
-        // .then((task) =>
-        //   {
-        //     console.log("Category of Task is----to_buy");
-        //     addNewTask(db, task, 'to_buy');
-        //     res.end("resolved");
-        //   })
-        // .catch(e => {
-        //   console.log(e);
-        //   // console.log("[Task.js]---Adding New Task");
-        //   res.end("resolved");
+        }).catch(err => console.log(err.message))})
 
-       
-        })
 
       })
 

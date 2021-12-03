@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   //Shows the popup display
   //This can also handle getting the card information
-  $('.card').click(function() {
+  $('.card').click(function() {alert("in popup")
     const taskId = $(this).attr('id');//tasks
     const url = `/tasks/${taskId}`;
     $.ajax({
@@ -27,6 +27,7 @@ $(document).ready(function() {
 
   // HANDLES DELETE
   $('.category').on('click', '#delete', function() {
+
     const id_parent = $( this ).parent().attr("id");
     $(`#${id_parent}`).hide();
     const url = `/tasks/${id_parent}`
@@ -37,8 +38,8 @@ $(document).ready(function() {
     .done(function(){
       
     })
+
+   
     console.log('DELETE');
   })
-
-
 });
