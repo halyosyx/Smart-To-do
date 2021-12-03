@@ -94,4 +94,6 @@ $(document).ready(function () {
       $('#to_eat, #to_read, #to_watch, #to_buy').sortable({
         connectWith: '.category'
       }).disableSelection();
+
+      module.exports = { loadCards };
   });

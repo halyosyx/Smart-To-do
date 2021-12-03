@@ -1,32 +1,32 @@
-$(document).ready(function() {
-
+$(document).ready(function () {
   //Shows the popup display
   //This can also handle getting the card information
-  $('.card').click(function() {alert("in popup")
-    const taskId = $(this).attr('id');//tasks
+  $(document).on('click', '.card', function () {
+    const taskId = $(this).attr('id');
     const url = `/tasks/${taskId}`;
     $.ajax({
       url: url,
       method: "GET"
     })
-    .then((tasks) => {
-      // alert(tasks[0]['id']);
-      $('#taskName').val(tasks[0]['taskname']);
-      $('#is_done').val(tasks[0]['is_done'])
-    });
-    
+      .then((tasks) => {
+        $('#taskId').val(tasks[0]['id'])
+        $('#taskName').val(tasks[0]['task_name']);
+        $('#is_done').val(tasks[0]['is_done'])
+      });
     $('#modal').css('display', 'block');
-  })
+  });
 
   //Clears the popup block
-  $('#close').click(function() {
+  $('#close').click(function () {
     $('#modal').css('display', 'none');
 
   })
 
   // HANDLES DELETE
-  $('.category').on('click', '#delete', function() {
-    //$('.card').hide();
+  $('.category').on('click', '#delete', function () {
+    $('.card').hide();
     console.log('DELETE');
   })
+
+
 });
