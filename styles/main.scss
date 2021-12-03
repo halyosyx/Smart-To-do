@@ -42,6 +42,8 @@ header {
 }
 
 .layout__list{
+  margin-left: 0px;
+  padding-left:0px;
   list-style-type: none;
   width: 250px;
 }
@@ -62,4 +64,9 @@ header {
 
 .error {
   color: red;
+}
+
+.layout__section{
+  margin-right: 20px;
+  margin-top: 20px;
 }

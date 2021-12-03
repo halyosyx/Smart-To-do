@@ -26,21 +26,22 @@ $(document).ready(function() {
 
   // HANDLES DELETE
 
-  $('.category').on('click', '#delete', function() {
+  // $('.category').on('click', '#delete', function(event) {
+  //   event.stopImmediatePropagation();
+  //   event.preventDefault();
+  //   const id_parent = $( this ).parent().attr("id");
+  //   // $(`#${id_parent}`).hide();
+  //   const url = `/tasks/${id_parent}`
+  //   $.ajax({
+  //     url:url, 
+  //     method: "DELETE"
+  //     })
+  //   .done(function(){
+  //     loadCards();
+  //   })
 
-    const id_parent = $( this ).parent().attr("id");
-    $(`#${id_parent}`).hide();
-    const url = `/tasks/${id_parent}`
-    $.ajax({
-      url:url, 
-      method: "DELETE"
-      })
-    .done(function(){
-      
-    })
-
-    console.log('DELETE');
-  })
+  //   console.log('DELETE');
+  // })
 
 
 });
