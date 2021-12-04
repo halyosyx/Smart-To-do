@@ -56,12 +56,6 @@ $(document).ready(function () {
         connectWith : '.layout__list'
       }).disableSelection();
 
-      // $('#to_eat, #to_read, #to_watch, #to_buy').sortable({
-      //   connectWith: '.layout__list'
-      // }).disableSelection();
-
-
-
           const isValid = function () {
        const text = $("#content").first().val();
        // error for no data pass
@@ -78,8 +72,6 @@ $(document).ready(function () {
        }
      }
      $('#formList').on("submit", function(event){
-       // alert("in form submit");
-   
        event.stopImmediatePropagation();
        event.preventDefault();
    
@@ -119,7 +111,6 @@ $(document).ready(function () {
       event.stopImmediatePropagation();
       event.preventDefault();
       const id_parent = $( this ).parent().attr("id");
-      // $(`#${id_parent}`).hide();
       const url = `/tasks/${id_parent}`
       $.ajax({
         url:url, 
