@@ -10,7 +10,7 @@ Restaurants, cafes, etc. (To eat).
 Books (To read).  
 Products (To buy).  
 
-To seggrigate data in categories imdb-api API, google-books-promise API and yelp-fusion API.
+To segregate data in categories imdb-api API, google-books-promise API and yelp-fusion API.
 ## Project Setup
 
 1. Clone this repository.  
@@ -35,5 +35,5 @@ To seggrigate data in categories imdb-api API, google-books-promise API and yelp
 
 ## Warnings
 Need API Keys for using imdb-api API and yelp-fusion API.
-There is a limit for API calls once it's over you need to regenerate a key it .
+There is a limit for API calls once it's over you need to regenerate a key to work.
 
