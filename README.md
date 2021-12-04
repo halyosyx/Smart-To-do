@@ -18,6 +18,9 @@ To segregate data in categories imdb-api API, google-books-promise API and yelp-
 3. Create database tables using file create_tables.sql.  
 4. populate data using file populate_tables.sql.  
 5. Using node.js, run command 'npm run local' in project directory.  
+
+## Final Product
+!["Add a task"](https://github.com/halyosyx/Smart-To-do/blob/master/docs/ezgif-4-1d778d97348b.gif)
 ## Dependencies
 
     cookie-session 1.4.0,
