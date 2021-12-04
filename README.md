@@ -1,21 +1,23 @@
 ## SmartToDo List
+
 =========
+
 SmartToDo list is a single page application that utilizes different APIs to categorize data. Users can add new tasks, recategorize list and delete a task. They can also mark it as completed.
 Each todo created should be categorized in one of the following category:
 
-Film / Series (To watch)
-Restaurants, cafes, etc. (To eat)
-Books (To read)
-Products (To buy)
+Film / Series (To watch).  
+Restaurants, cafes, etc. (To eat).  
+Books (To read).  
+Products (To buy).  
 
 To seggrigate data in categories imdb-api API, google-books-promise API and yelp-fusion API.
 ## Project Setup
 
-Clone this repository.
-Install all dependencies using npm install command.
-Create database tables using file create_tables.sql.
-populate data using file populate_tables.sql. 
-Using node.js, run command 'npm run local' in project directory.
+1. Clone this repository.  
+2. Install all dependencies using npm install command.  
+3. Create database tables using file create_tables.sql.  
+4. populate data using file populate_tables.sql.  
+5. Using node.js, run command 'npm run local' in project directory.  
 ## Dependencies
 
     cookie-session 1.4.0,
