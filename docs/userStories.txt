@@ -1,0 +1,5 @@
+As a User, I can login/logout to check all my tasks.
+As a User, I can create a new task as I want.
+As a User, I can edit new task because some otherthing comes up.
+As a User, I can delete a task as it is no longer required.
+As a User, I can mark a task completed when it's done.
